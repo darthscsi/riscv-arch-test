@@ -127,7 +127,7 @@ def _detect_sew(testsuite: str) -> int:
         (r"Zvfbfmin$", 16),
         (r"Zvfhmin$", 16),
         (r"Zvfbfwma$", 16),
-        (r"Zvk(g|nha|ned|sed|sh)$", 32),  # codespell:ignore ned
+        (r"Zvk(gs?|nha|ned|sed|sh)$", 32),  # codespell:ignore ned
     ]:
         match = re.search(pattern, testsuite)
         if match:

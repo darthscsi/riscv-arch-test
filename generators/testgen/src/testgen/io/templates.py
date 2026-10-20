@@ -133,6 +133,8 @@ def canonicalize_extensions(
         ext_components.insert(0, "E" if E_ext else "I")  # Always include base integer extension
     if "Zcd" in ext_components:
         ext_components.append("D")  # Add D if Zcd is present
+    if "Zvkgs" in ext_components:
+        ext_components.append("Zvkg")  # Zvkgs depends on Zvkg
     if any(ext in ext_components for ext in ["Zcf", "D", "Zfh", "Zfhmin", "Zfa", "Zfbfmin"]):
         ext_components.append("F")  # Add F if any floating point extension is present
 

@@ -27,6 +27,30 @@
   .endif
 .endm
 
+// Zvkgs: assemble from the instruction fields so tests build without assembler support.
+.macro RVTEST_VREGNUM out, reg
+  .irp i, 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
+    .ifc \reg, v\i
+      \out = \i
+    .endif
+  .endr
+.endm
+
+.macro RVTEST_ZVKGS funct6, vd, vs2, vs1
+  RVTEST_VREGNUM .Lzvkgs_vd, \vd
+  RVTEST_VREGNUM .Lzvkgs_vs2, \vs2
+  .insn 4, 0x77 | (.Lzvkgs_vd << 7) | (2 << 12) | (\vs1 << 15) | (.Lzvkgs_vs2 << 20) | (1 << 25) | (\funct6 << 26)
+.endm
+
+.macro vghsh.vs vd, vs2, vs1
+  RVTEST_VREGNUM .Lzvkgs_vs1, \vs1
+  RVTEST_ZVKGS 0x23, \vd, \vs2, .Lzvkgs_vs1
+.endm
+
+.macro vgmul.vs vd, vs2
+  RVTEST_ZVKGS 0x29, \vd, \vs2, 17
+.endm
+
 #endif
 
 #endif

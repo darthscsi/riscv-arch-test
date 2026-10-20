@@ -72,6 +72,10 @@ vvv_sha_egs4_config = InstructionTypeConfig(
     required_params={"vd", "vs1", "vs2"},
     vector_data=VectorTypeConfig(overlap_constraints={("vd", "vs1"), ("vd", "vs2")}, egs=4),
 )
+vvv_vs_egs4_config = InstructionTypeConfig(
+    required_params={"vd", "vs1", "vs2"},
+    vector_data=VectorTypeConfig(overlap_constraints={("vd", "vs2")}, egs=4),
+)
 vvv_sm_egs8_config = InstructionTypeConfig(
     required_params={"vd", "vs1", "vs2"},
     vector_data=VectorTypeConfig(overlap_constraints={("vd", "vs2")}, egs=8),
@@ -182,6 +186,13 @@ def format_vvv_sha_egs4(
     instr_str: str, test_data: TestData, params: InstructionParams
 ) -> tuple[list[str], list[str], list[str]]:
     return format_vvv_like_type(instr_str, test_data, params, "VVV_SHA_EGS4", egs=4)
+
+
+@add_instruction_formatter("VVV_VS_EGS4", vvv_vs_egs4_config)
+def format_vvv_vs_egs4(
+    instr_str: str, test_data: TestData, params: InstructionParams
+) -> tuple[list[str], list[str], list[str]]:
+    return format_vvv_like_type(instr_str, test_data, params, "VVV_VS_EGS4", egs=4)
 
 
 @add_instruction_formatter("VVV_SM_EGS8", vvv_sm_egs8_config)

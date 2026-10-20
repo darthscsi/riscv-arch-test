@@ -533,6 +533,9 @@
 `ifdef ZVKG_COVERAGE
   `include "Zvkg_coverage.svh"
 `endif
+`ifdef ZVKGS_COVERAGE
+  `include "Zvkgs_coverage.svh"
+`endif
 `ifdef ZVKNED_COVERAGE
   `include "Zvkned_coverage.svh"
 `endif

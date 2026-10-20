@@ -816,7 +816,7 @@ def emit(
     present_labels: dict[int, str],
     desc: str,
 ) -> TestChunk:
-    if instr_name == "vghsh.vv":
+    if instr_name.startswith("vghsh."):
         vd_val_ptr = handle_label(vd_val, present_labels, test_data, f"{desc}_vd")
         vs1_val_ptr = handle_label(vs1_val, present_labels, test_data, f"{desc}_vs1")
     else:
@@ -827,7 +827,7 @@ def emit(
 
     pretty_desc = "NIST GCM Example " + desc.replace("_", " ")
 
-    if instr_name == "vghsh.vv":
+    if instr_name.startswith("vghsh."):
         params = generate_random_vector_params(
             test_data,
             instr_name,

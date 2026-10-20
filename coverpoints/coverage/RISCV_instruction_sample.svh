@@ -2659,10 +2659,19 @@
             ins.add_vm(3);
             ins.add_v0();
         end
+        "vghsh.vs"     : begin
+            ins.add_vd(0);
+            ins.add_vs2(1);
+            ins.add_vs1(2);
+        end
         "vghsh.vv"     : begin
             ins.add_vd(0);
             ins.add_vs2(1);
             ins.add_vs1(2);
+        end
+        "vgmul.vs"     : begin
+            ins.add_vd(0);
+            ins.add_vs2(1);
         end
         "vgmul.vv"     : begin
             ins.add_vd(0);

@@ -706,6 +706,10 @@
         `cover_info("//      Zvkg - Enabled");
         `include "Zvkg_coverage_init.svh"
     `endif
+    `ifdef COVER_ZVKGS
+        `cover_info("//      Zvkgs - Enabled");
+        `include "Zvkgs_coverage_init.svh"
+    `endif
     `ifdef COVER_ZVKNED
         `cover_info("//      Zvkned - Enabled");
         `include "Zvkned_coverage_init.svh"

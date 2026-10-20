@@ -532,6 +532,9 @@
     `ifdef COVER_ZVKG
         zvkg_sample(hart, issue, ins);
     `endif
+    `ifdef COVER_ZVKGS
+        zvkgs_sample(hart, issue, ins);
+    `endif
     `ifdef COVER_ZVKNED
         zvkned_sample(hart, issue, ins);
     `endif

@@ -95,6 +95,8 @@ class Config(BaseModel):
     ref_model_type: RefModelType  # Inferred from ref_model_exe by model validator
     include_priv_tests: bool = True
     harts: int = Field(default=1, ge=1)
+    # Implemented extensions that UDB does not know yet, so they cannot be listed in the UDB config.
+    non_udb_extensions: tuple[str, ...] = ()
 
     model_config = {"frozen": True}
 
