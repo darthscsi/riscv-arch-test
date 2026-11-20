@@ -115,7 +115,10 @@ def canonicalize_extensions(
     """
     # Use required_extensions if provided, otherwise parse from testsuite name
     ext_components = (
-        required_extensions.copy() if required_extensions is not None else re.findall(r"[A-Z][a-z]*", testsuite)
+        required_extensions.copy()
+        if required_extensions is not None
+        # A trailing number is the SEW of a vector suite, not part of an extension name
+        else re.findall(r"[A-Z][a-z0-9]*", re.sub(r"\d+$", "", testsuite))
     )
     ext_components.extend(extra_extensions)
 
@@ -174,6 +177,7 @@ def get_vector_base_extension(testsuite: str, instr_name: str, xlen: int, sew: i
         "Vf32": ["Zve32f", "F"],
         "Vf64": ["Zve64d", "F", "D"],
         "Zvfbfmin": ["Zve32f"],
+        "Zvfofp8min": ["Zve32f", "F"],
         "Zvfbfwma": ["Zve32f", "Zfbfmin", "F"],
         "Zvfhmin": ["Zve32f", "F"],
     }

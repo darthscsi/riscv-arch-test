@@ -581,14 +581,26 @@ def load_test_vtype(params: InstructionParams, random_vl_reg: str, *, force_vlma
     mask_flags += ", ta" if params.ta else ", tu"
     mask_flags += ", ma" if params.ma else ", mu"
 
-    flags = lmul_flag + mask_flags
+    vtype = f"e{params.sew}, {lmul_flag}{mask_flags}"
+    comment = ""
+    if params.altfmt:
+        # Assemblers do not accept vtype.altfmt (e8alt) yet, so give vtype as a number.
+        assert params.sew is not None, "params.sew must be set for a vector test"
+        comment = f" # e{params.sew}alt, {lmul_flag}{mask_flags}"
+        vtype = hex(
+            (1 << 8)
+            | (bool(params.ma) << 7)
+            | (bool(params.ta) << 6)
+            | ((int(math.log2(params.sew)) - 3) << 3)
+            | (int(math.log2(params.lmul)) & 0b111)
+        )
 
     if params.vl == "vlmax" or force_vlmax:
-        return f"vsetvli x{params.temp_reg}, x0, e{params.sew}, {flags}"
+        return f"vsetvli x{params.temp_reg}, x0, {vtype}{comment}"
     elif params.vl == "random":
-        return f"vsetvli x{params.temp_reg}, {random_vl_reg}, e{params.sew}, {flags}"
+        return f"vsetvli x{params.temp_reg}, {random_vl_reg}, {vtype}{comment}"
     else:
-        return f"vsetivli x{params.temp_reg}, {params.vl}, e{params.sew}, {flags}"
+        return f"vsetivli x{params.temp_reg}, {params.vl}, {vtype}{comment}"
 
 
 def load_vec_regs(regs: list[VectorLoad], params: InstructionParams, test_data: TestData) -> tuple[list[str], str]:

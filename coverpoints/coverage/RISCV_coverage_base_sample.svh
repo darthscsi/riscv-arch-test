@@ -394,6 +394,9 @@
     `ifdef COVER_ZVFHMIN
         zvfhmin_sample(hart, issue, ins);
     `endif
+    `ifdef COVER_ZVFOFP8MIN
+        zvfofp8min_sample(hart, issue, ins);
+    `endif
     `ifdef COVER_ZVKB16
         zvkb16_sample(hart, issue, ins);
     `endif

@@ -24,6 +24,12 @@ fvw_config = InstructionTypeConfig(
     required_params={"vd", "vs2"},
     vector_data=VectorTypeConfig(overlap_constraints={("vd", "vs2_top")}, widened_regs={"vs2"}),
 )
+# Quad-narrowing: vs2 has four times the element width and EMUL of vd.
+fvq_config = InstructionTypeConfig(
+    instruction_class=["vector_fp"],
+    required_params={"vd", "vs2"},
+    vector_data=VectorTypeConfig(overlap_constraints={("vd", "vs2_top")}, quad_widened_regs={"vs2"}),
+)
 
 
 @add_instruction_formatter("FVV", fvv_config)
@@ -63,6 +69,20 @@ def format_fvw_type(
     )
 
     setup, test, check = format_vv_like_type(instr_str, test_data, params, "FVW", widened_regs={"vs2"})
+    handle_vector_fp(setup, check, params.csr_frm_val, test_data)
+
+    return setup, test, check
+
+
+@add_instruction_formatter("FVQ", fvq_config)
+def format_fvq_type(
+    instr_str: str, test_data: TestData, params: InstructionParams
+) -> tuple[list[str], list[str], list[str]]:
+    assert params.csr_frm_val is not None, (
+        "All Vector-FP instructions use the dyn rounding mode, so params.csr_frm_val MUST be provided"
+    )
+
+    setup, test, check = format_vv_like_type(instr_str, test_data, params, "FVQ", vs2_lmul_multiplier=4)
     handle_vector_fp(setup, check, params.csr_frm_val, test_data)
 
     return setup, test, check

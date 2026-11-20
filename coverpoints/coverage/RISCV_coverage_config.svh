@@ -395,6 +395,9 @@
 `ifdef ZVFHMIN_COVERAGE
   `include "Zvfhmin_coverage.svh"
 `endif
+`ifdef ZVFOFP8MIN_COVERAGE
+  `include "Zvfofp8min_coverage.svh"
+`endif
 `ifdef ZVKB16_COVERAGE
   `include "Zvkb16_coverage.svh"
 `endif

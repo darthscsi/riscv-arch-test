@@ -84,6 +84,7 @@ class InstructionParams:
     vxrm: str | None = None  # Vector Fixed Point Rounding Mode
     ta: bool | None = None  # Tail Agnostic
     ma: bool | None = None  # Mask Agnostic
+    altfmt: bool = False  # vtype.altfmt, the alternate format of the element type
     egs: int | None = None  # Element Group Size
     ignore_vector_safety: bool = False  # Set this to disable vector safety (e.g. allow arbitrary index values)
     vd_different_eew_overlap: bool = False  # A source-dest overlap at different eews are tail and mask agnostic

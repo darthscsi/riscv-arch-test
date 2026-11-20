@@ -522,6 +522,10 @@
         `cover_info("//      Zvfhmin - Enabled");
         `include "Zvfhmin_coverage_init.svh"
     `endif
+    `ifdef COVER_ZVFOFP8MIN
+        `cover_info("//      Zvfofp8min - Enabled");
+        `include "Zvfofp8min_coverage_init.svh"
+    `endif
     `ifdef COVER_ZVKB16
         `cover_info("//      Zvkb16 - Enabled");
         `include "Zvkb16_coverage_init.svh"

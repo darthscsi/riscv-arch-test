@@ -112,7 +112,7 @@ VECTOR_PREFIXES = ("Vx", "Zv", "Vls", "Vf")
 PRIV_VECTOR_PREFIXES = ("ExceptionsV", "SsstrictV", "MisalignV")
 
 # Subset of vector prefixes that support widening instructions.
-VECTOR_WIDEN_PREFIXES = ("Vx", "Vls", "Vf", "Zvfhmin", "Zvfbfmin", "Zvfbfwma")
+VECTOR_WIDEN_PREFIXES = ("Vx", "Vls", "Vf", "Zvfhmin", "Zvfbfmin", "Zvfbfwma", "Zvfofp8min")
 
 
 def _sew_variants_for(arch: str) -> list[str] | None:
@@ -442,6 +442,8 @@ def _get_effew(arch: str) -> str:
         return match.group(1)
     if arch in ("Zvfhmin", "Zvfbfmin", "Zvfbfwma"):
         return "16"
+    if arch == "Zvfofp8min":
+        return "8"
     if arch.startswith("Zvk"):
         return "32"
     raise ValueError(f"Arch does not contain an expected integer: '{arch}'")

@@ -1,0 +1,6 @@
+Instruction,Type,RV32,RV64,EFFEW8,EFFEW16,EFFEW32,EFFEW64,cp_asm_count,cp_vd,cp_vs2,cp_masking_edges,cr_vl_lmul,cr_vtype_agnostic,cp_vl_0,cp_csr_fflags,cp_csr_frm,std_vec,cp_custom_ofp8_edges
+vfwcvtbf16.f.f.v,FWV,x,x,x,,,,x,emul2,x,x,lmul4max,lmul4max,x,,,x,widen
+vfncvtbf16.f.f.w,FVW,x,x,x,,,,x,x,emul2,x,lmul4max,lmul4max,x,voun,v,x,bf16
+vfncvtbf16.sat.f.f.w,FVW,x,x,x,,,,x,x,emul2,x,lmul4max,lmul4max,x,voun,v,x,bf16
+vfncvt.f.f.q,FVQ,x,x,x,,,,x,x,emul4,x,lmul2max,lmul2max,x,voun,v,x,f32
+vfncvt.sat.f.f.q,FVQ,x,x,x,,,,x,x,emul4,x,lmul2max,lmul2max,x,voun,v,x,f32

@@ -50,6 +50,8 @@ class VectorInstructionInfo:
             return self.load_store_eew / sew
         if register in vector_config.widened_regs:
             return 2
+        if register in vector_config.quad_widened_regs:
+            return 4
         return 1
 
 

@@ -1013,6 +1013,7 @@ function `XLEN_BITS get_csr_field(int hart, int issue, int prev, bit [11:0] addr
 `ifdef UDB_MXLEN_64
         "vill" : val = (val >> 63) & 64'h1;
 `endif
+        "altfmt" : val = (val >> 8) & 'h1;
         "vlmul" : val = val & 'h7;
         "vma" : val = (val >> 7) & 'h1;
         "vsew" : val = (val >> 3) & 'h7;
